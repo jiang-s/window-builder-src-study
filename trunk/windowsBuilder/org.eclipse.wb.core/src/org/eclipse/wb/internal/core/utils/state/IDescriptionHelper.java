@@ -15,6 +15,8 @@ import org.eclipse.wb.internal.core.model.property.editor.PropertyEditor;
 
 /**
  * Helper for accessing <code>ComponentDescription</code> and its parts.
+ *     通过给定的类型获得相应的属性编辑器
+ *     从对象中获得相应的描述
  * 
  * @author scheglov_ke
  * @coverage core.model

@@ -18,6 +18,9 @@ import java.util.List;
 
 /**
  * Helper for paste operation.
+ * 粘贴操作的帮助类
+ * 获得粘贴命令的实例
+ * 获得被粘贴的模型对象
  * 
  * @author scheglov_ke
  * @author mitin_aa

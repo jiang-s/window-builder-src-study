@@ -16,6 +16,19 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * Any page for {@link IDesignerEditor}.
+ * 用于IDesignerEditor的编辑器页面
+ * 定义的行为有：
+ *     用一个现有的IDesignerEditor的来初始化这个编辑器页面
+ *     dispose
+ *     处理页面激活，去激活状态
+ *     创建页面控件
+ *     获得这个页面对应的控件
+ *     获得编辑器名称
+ *     获得编辑器图像
+ *     设置编辑器聚焦
+ *  下有DesignPage DataBindPage SourcePage
+ *  
+ * 
  * 
  * @author scheglov_ke
  * @coverage core.editor

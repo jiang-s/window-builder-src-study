@@ -47,6 +47,7 @@ import java.util.Map;
 
 /**
  * Description of any {@link JavaInfo}, its constructors, methods, etc.
+ * Java代码中的部件描述器 诸如针方法，构造器的等等
  * 
  * @author scheglov_ke
  * @coverage core.model.description

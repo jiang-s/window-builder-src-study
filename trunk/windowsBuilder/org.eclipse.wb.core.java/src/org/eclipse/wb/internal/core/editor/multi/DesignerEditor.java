@@ -45,7 +45,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Multi page editor with Java editor and {@link DesignPage}.
+ * Multi page editor with Java editor and {@link DesignPage}. 
+ * 继承自CompilationUnitEditor 的编辑器 是wb的主设计器
  * 
  * @author scheglov_ke
  * @author mitin_aa

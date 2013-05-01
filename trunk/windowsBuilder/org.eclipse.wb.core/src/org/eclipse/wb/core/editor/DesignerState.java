@@ -12,6 +12,7 @@ package org.eclipse.wb.core.editor;
 
 /**
  * Designer parsing state.
+ * 设计编辑器的解析状态  有正在解析 失败 未定义 成功等等
  * 
  * @author lobas_av
  * @coverage core.editor

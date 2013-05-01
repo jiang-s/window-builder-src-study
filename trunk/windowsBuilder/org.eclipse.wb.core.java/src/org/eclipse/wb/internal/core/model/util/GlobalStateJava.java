@@ -45,6 +45,7 @@ import java.util.List;
 
 /**
  * Implementations of {@link GlobalState} for {@link JavaInfo}.
+ * 这对java的GlobalState 实现
  * 
  * @author scheglov_ke
  * @coverage core.model.util
@@ -53,6 +54,7 @@ public final class GlobalStateJava {
   ////////////////////////////////////////////////////////////////////////////
   //
   // Access
+  // 激活相应的部件 并对全局的相应的帮助类 做相应的设置
   //
   ////////////////////////////////////////////////////////////////////////////
   /**

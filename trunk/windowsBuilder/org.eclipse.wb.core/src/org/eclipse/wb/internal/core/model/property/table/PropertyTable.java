@@ -1190,7 +1190,7 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   }
 
   /**
-   * Draws single {@link PropertyInfo} in specified rectangle.
+   * 绘制单个属性 表格项目 Draws single {@link PropertyInfo} in specified rectangle.
    */
   private void drawProperty(GC gc, PropertyInfo propertyInfo, int y, int height, int width) {
     // remember colors

@@ -40,6 +40,8 @@ import java.util.Map;
 
 /**
  * Manager for handling undo/redo modifications in {@link ICompilationUnit}.
+ * undo redo 管理器‘
+ * 暂没看懂这个类的设计思路   2013/05/01
  * 
  * @author scheglov_ke
  * @coverage core.editor
