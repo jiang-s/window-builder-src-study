@@ -12,6 +12,7 @@ package org.eclipse.wb.internal.core.utils.execution;
 
 /**
  * Analog of {@link Runnable} where method <code>run</code> can throw {@link Exception}.
+ * Runnable 类似封装  只是可以抛出异常
  * 
  * @author scheglov_ke
  * @coverage core.util

@@ -27,6 +27,8 @@ import org.eclipse.swt.widgets.Listener;
 
 /**
  * Implementation of {@link MultiMode} for split mode.
+ * 设计编辑器的创建入口
+ * create方法中的createDesign();
  * 
  * @author scheglov_ke
  * @coverage core.editor

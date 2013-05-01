@@ -16,6 +16,13 @@ import org.eclipse.jdt.core.ICompilationUnit;
 
 /**
  * Interface for multi-page GUI editor, where one of the pages in Java source editor.
+ * 多页签的图像编辑器的接口  含有一个java source编辑器
+ * 定义的行为与属性
+ *     编辑器的id
+ *     获得编辑器的multiMode
+ *     获得java source编辑器
+ *     增加/移除编辑器的监听器
+ *     
  * 
  * @author scheglov_ke
  * @author mitin_aa

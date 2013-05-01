@@ -48,6 +48,7 @@ import javax.swing.UIManager;
 
 /**
  * The editor-wide state. It contains information about current editor.
+ * 编辑器范围内的状态  即  生命周期为一个编辑器
  * 
  * @author scheglov_ke
  * @coverage core.model

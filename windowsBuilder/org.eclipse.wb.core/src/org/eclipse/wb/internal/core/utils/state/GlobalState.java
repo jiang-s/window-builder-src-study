@@ -15,6 +15,18 @@ import org.eclipse.wb.internal.core.model.description.ToolkitDescription;
 
 /**
  * Global context for active Java or XML based editor.
+ * java和xml编辑器的上下文
+ * 主要用静态属性的方式实现
+ * 有： 1.是否正在解析
+ *     2.界面提示
+ *     3.当前激活的模型ObjectInfo
+ *     4.类加载器
+ *     5.参数获取器
+ *     6. Java部件（诸如 构造器，方法等）描述的操作帮助类
+ *     7. 验证帮助类
+ *     8. 布局帮助类
+ *     9. 粘贴动作帮助类..
+ *
  * 
  * @author scheglov_ke
  * @coverage core.model

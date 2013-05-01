@@ -14,17 +14,24 @@ import java.util.Map;
 
 /**
  * Provider for parameters of component, from description or instance specific.
+ * 组件的参数提供器
+ *     从模型活描述中获得只读参数
+ *     获得参数
+ *     判断某个参数的值是否为true
+ * 
  * 
  * @author scheglov_ke
  * @coverage core.model
  */
 public interface IParametersProvider {
   /**
+   * 从模型活描述中获得只读参数
    * @return the read only {@link Map} of parameters from model or description.
    */
   Map<String, String> getParameters(Object object);
 
   /**
+   * 获得参数
    * @return the parameter value from model or description.
    */
   String getParameter(Object object, String name);

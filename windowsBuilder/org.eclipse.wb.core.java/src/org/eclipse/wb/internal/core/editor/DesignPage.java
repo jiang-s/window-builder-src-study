@@ -68,6 +68,7 @@ import java.util.Map;
 
 /**
  * "Design" page of {@link DesignerEditor}.
+ * 设计页签
  * 
  * @author scheglov_ke
  * @author lobas_av
@@ -90,6 +91,7 @@ public final class DesignPage implements IDesignPage {
   /**
    * Listener for reparsing on external modifications, when our editor is activated.<br>
    * Checks for that really THIS editor instance activated.
+   * 在编辑器被激活时，当有外部改变时，用于解析的监听。
    * 
    * Sets active JavaInfo.
    */
@@ -103,6 +105,8 @@ public final class DesignPage implements IDesignPage {
               GlobalStateJava.activate(m_rootObject);
               if (m_active) {
                 checkDependenciesOnDesignPageActivation();
+                
+                // 撤销管理器  去激活 再做激活
                 m_undoManager.deactivate();
                 m_undoManager.activate();
               }
@@ -113,8 +117,15 @@ public final class DesignPage implements IDesignPage {
     }
   };
 
+  
+  /**
+   * 初始化编辑器
+   * @param designerEditor
+   */
   public void initialize(IDesignerEditor designerEditor) {
     m_designerEditor = (DesignerEditor) designerEditor;
+    
+    // 有异常 根据设置 是否吐出来
     ExecutionUtils.runRethrow(new RunnableEx() {
       public void run() throws Exception {
         m_compilationUnit = m_designerEditor.getCompilationUnit();
@@ -165,6 +176,7 @@ public final class DesignPage implements IDesignPage {
 
   /**
    * Creates the SWT control(s) for this page.
+   * 创建编辑器页签 SWT控件部分
    */
   public Control createControl(Composite parent) {
     Composite container = new Composite(parent, SWT.NONE);

@@ -14,6 +14,11 @@ import org.eclipse.jdt.core.ICompilationUnit;
 
 /**
  * "Design" page of {@link IDesignerEditor}.
+ * 编辑器中设计器编辑器页的接口
+ * 定义行为
+ *     设置代码与model的同步模式
+ *     获得设计编辑器的解析状态  有正在解析 失败 未定义 成功等等
+ *     刷新GEF
  * 
  * @author scheglov_ke
  * @coverage core.editor

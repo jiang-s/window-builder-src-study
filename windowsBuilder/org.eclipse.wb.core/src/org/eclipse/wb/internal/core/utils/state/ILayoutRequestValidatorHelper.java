@@ -16,6 +16,14 @@ import org.eclipse.wb.internal.core.model.description.IComponentDescription;
 
 /**
  * Helper for {@link ILayoutRequestValidator}s.
+ * 布局请求的验证器
+ * 定义的行为有
+ *     是否是一个组件
+ *     获得粘贴部件的描述
+ *     获得粘贴部件的模型
+ *     是否能将这个孩子挂在这个父亲下面
+ *     能否被引用
+ *     能否被变更父亲
  * 
  * @author scheglov_ke
  * @coverage core.model

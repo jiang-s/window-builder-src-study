@@ -12,6 +12,9 @@ package org.eclipse.wb.core.editor;
 
 /**
  * Listener for {@link IDesignerEditor} events.
+ * 设计编辑器的监听器
+ * 目前监听的行为有
+ *     重新parse的监听器
  * 
  * @author scheglov_ke
  * @coverage core.editor

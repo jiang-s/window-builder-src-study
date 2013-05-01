@@ -21,6 +21,10 @@ import java.beans.Beans;
 
 /**
  * Utilities for executing actions, such as {@link RunnableEx}.
+ * 执行动作的util类
+ * 实现的行为有
+ *     在UI线程执行
+ *     同步异步等等
  * 
  * @author scheglov_ke
  * @coverage core.util
@@ -195,7 +199,8 @@ public class ExecutionUtils {
 
   /**
    * Runs given {@link RunnableEx} within UI thread using {@link Display#asyncExec(Runnable)}. Logs
-   * a {@link Throwable} which may occur.
+   * a {@link Throwable} which may occur
+   * UI 异步执行.
    */
   public static void runAsync(final RunnableEx runnable) {
     Display.getDefault().asyncExec(new Runnable() {
