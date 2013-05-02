@@ -43,6 +43,7 @@ public interface IPage {
   Control getControl();
 
   /**
+   * 所有IPage 均需要实现设置ToolBar的方法
    * Allows the page to make contributions to the given {@link IToolBarManager}. The contributions
    * will be visible when the page is visible. This method is automatically called shortly after
    * {@link #createControl(Composite)} is called.

@@ -40,6 +40,7 @@ import org.eclipse.ui.IEditorPart;
 
 /**
  * {@link Composite} with GUI for visual design, i.e. properties table, palette, GEF.
+ *  设计器 最高层级的
  * 
  * @author scheglov_ke
  * @coverage core.editor
@@ -82,15 +83,21 @@ public abstract class DesignComposite extends Composite {
           IFlyoutPreferences.DOCK_WEST,
           IFlyoutPreferences.STATE_OPEN,
           300);
+      
+      // 先是左边的structure的dock面板，可以拖动，收缩，关闭
       mainComposite = new FlyoutControlComposite(this, SWT.NONE, preferences);
       mainComposite.setTitleText("Structure");
       mainComposite.setMinWidth(200);
+      
+      // 控件有自己相应的菜单贡献器
       mainComposite.addMenuContributor(new DesignerFlyoutMenuContributor(StructureView.ID));
     }
+    
     // create components composite
     m_componentsComposite =
         new DesignComponentsComposite(mainComposite.getFlyoutParent(), SWT.NONE);
-    // create editor composite
+    
+    // create editor composite 真正的编辑器画板区域
     createEditorComposite(mainComposite.getClientParent());
   }
 

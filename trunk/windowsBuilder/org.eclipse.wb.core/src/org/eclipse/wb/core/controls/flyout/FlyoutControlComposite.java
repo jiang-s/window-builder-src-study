@@ -134,6 +134,7 @@ public final class FlyoutControlComposite extends Composite {
 
   /**
    * Sets the bit set with valid docking locations.
+   * 支持dock的位置设置
    */
   public void setValidDockLocations(int validDockLocations) {
     m_validDockLocations = validDockLocations;
@@ -882,6 +883,8 @@ public final class FlyoutControlComposite extends Composite {
       manager.addMenuListener(new IMenuListener() {
         public void menuAboutToShow(IMenuManager menuMgr) {
           addDockActions();
+          
+          // 在配置菜单的时候 会将搜集到的菜单贡献器 全部拿过来开始贡献菜单
           for (IFlyoutMenuContributor contributor : m_menuContributors) {
             contributor.contribute(manager);
           }

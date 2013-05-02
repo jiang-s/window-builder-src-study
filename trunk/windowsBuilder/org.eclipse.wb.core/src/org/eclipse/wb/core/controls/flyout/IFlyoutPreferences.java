@@ -12,7 +12,9 @@ package org.eclipse.wb.core.controls.flyout;
 
 /**
  * Provider for preferences of flyout control of {@link FlyoutControlComposite}.
- * 针对Flyout control的行为做一些控制
+ * 针对Flyout control 属性做了一些设定
+ * 比如这个dock在东向 还是西向  南向 北向  其实就是上下左右  只是按地图上的说法分的
+ * 还有就是dock是打开还是收缩 或者关闭的状态
  * 
  * @author scheglov_ke
  * @coverage core.control

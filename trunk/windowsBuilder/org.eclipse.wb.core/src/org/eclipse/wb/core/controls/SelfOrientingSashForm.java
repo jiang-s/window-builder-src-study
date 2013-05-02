@@ -22,6 +22,9 @@ import org.eclipse.swt.widgets.Composite;
  * client area. This is done so that the sash form can be placed in a view that will sometimes be
  * tall and narrow and sometimes be short and wide and still lay out its children in a pleasing way.
  * <p>
+ * 自取向sashForm， 会根据长宽关系来决定是横向拆分 还是水平拆分
+ * 当很宽的时候 就改成竖向拆分
+ * 实现细节 需要重写getOrientation 和layout等方法
  * 
  * @author unknown
  * @author Brian Wilkerson
