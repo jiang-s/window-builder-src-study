@@ -12,6 +12,7 @@ package org.eclipse.wb.core.controls.flyout;
 
 /**
  * Provider for preferences of flyout control of {@link FlyoutControlComposite}.
+ * 针对Flyout control的行为做一些控制
  * 
  * @author scheglov_ke
  * @coverage core.control

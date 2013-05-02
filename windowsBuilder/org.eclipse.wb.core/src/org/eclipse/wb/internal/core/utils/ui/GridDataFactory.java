@@ -352,6 +352,7 @@ public final class GridDataFactory {
 
   /**
    * Sets the horizontal and vertical alignment to GridData.FILL.
+   * 对其方式是填充满单元格
    */
   public GridDataFactory fill() {
     return align(GridData.FILL, GridData.FILL);
@@ -525,6 +526,13 @@ public final class GridDataFactory {
     return this;
   }
 
+  /**
+   * 随父控件的收缩而收缩
+   * <一句话功能简述>
+   * <功能详细描述>
+   * @return
+   * @see [类、类#方法、类#成员]
+   */
   public GridDataFactory grab() {
     return grab(true, true);
   }

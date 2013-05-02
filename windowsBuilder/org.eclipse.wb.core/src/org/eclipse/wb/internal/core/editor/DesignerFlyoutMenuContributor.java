@@ -20,6 +20,8 @@ import org.eclipse.jface.action.IMenuManager;
 
 /**
  * {@link IFlyoutMenuContributor} for structure and palette.
+ * structure 和 palette的菜单贡献器
+ * 在structure头上的title栏点右键 能看到 Extract as view 菜单
  * 
  * @author scheglov_ke
  * @coverage core.editor

@@ -180,6 +180,8 @@ public final class DesignPage implements IDesignPage {
    */
   public Control createControl(Composite parent) {
     Composite container = new Composite(parent, SWT.NONE);
+    
+    // 整个设计器页面 采用grid layout, margin和space都设置成0
     GridLayoutFactory.create(container).noMargins().noSpacing();
     createControl_pageBook(container);
     return container;
@@ -187,7 +189,10 @@ public final class DesignPage implements IDesignPage {
 
   private void createControl_pageBook(Composite container) {
     m_pageBook = new PageBook(container, SWT.NONE);
+    
+    // m_pageBook的Gridlayout行为 grab 随父控件的收缩而收缩 对其方式的设置
     GridDataFactory.create(m_pageBook).grab().fill();
+    
     // design composite
     ICommandExceptionHandler exceptionHandler = new ICommandExceptionHandler() {
       public void handleException(Throwable exception) {
@@ -640,6 +645,7 @@ public final class DesignPage implements IDesignPage {
   /**
    * Handles any exception happened on "Design" page, such as exceptions in GEF commands, property
    * table, components tree.
+   * 捕捉设计器的异常 并对界面截图
    */
   private void handleDesignException(Throwable e) {
     // at first, try to make post-mortem screenshot

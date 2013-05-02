@@ -312,6 +312,7 @@ public class DrawUtils {
   //
   ////////////////////////////////////////////////////////////////////////////
   /**
+   * 创建左转90度的图片，主要视图收起来的时候显示title在左边
    * Returns a new Image that is the given Image rotated left by 90 degrees. The client is
    * responsible for disposing the returned Image. This method MUST be invoked from the
    * user-interface (Display) thread.
