@@ -31,6 +31,8 @@ import org.eclipse.ui.IEditorPart;
 
 /**
  * {@link Composite} with GUI for visual design, i.e. properties table, palette, GEF.
+ * 重写了DesignComposite 一些方法 诸如createDesignActions等
+ * 
  * 
  * @author scheglov_ke
  * @coverage core.editor

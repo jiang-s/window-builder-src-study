@@ -46,6 +46,11 @@ import java.util.List;
  * {@link FlyoutControlComposite} is container for two {@link Control}'s. One (client control) is
  * used to fill client area. Second (flyout control) can be docked to any enabled position or
  * temporary hidden.
+ * 这个自定义控件有两个control
+ * 一个用于填充client区域，第二个用于？？
+ * 
+ * 关联的类：
+ * IFlyoutPreferences  FlyoutContainer(内部类) IFlyoutMenuContributor DesignerFlyoutMenuContributor
  * 
  * @author scheglov_ke
  * @coverage core.control
@@ -53,6 +58,8 @@ import java.util.List;
 public final class FlyoutControlComposite extends Composite {
   private static final int RESIZE_WIDTH = 5;
   private static final int TITLE_LINES = 30;
+  
+  // 标题上两个横线和文字间的间距
   private static final int TITLE_MARGIN = 5;
   private static final Font TITLE_FONT = JFaceResources.getFontRegistry().getBold(
       JFaceResources.DEFAULT_FONT);
@@ -86,6 +93,8 @@ public final class FlyoutControlComposite extends Composite {
   ////////////////////////////////////////////////////////////////////////////
   //
   // Constructor
+  // 1. 增加resize事件监听  做layout
+  // 2. 构建FlyoutContainer实例
   //
   ////////////////////////////////////////////////////////////////////////////
   public FlyoutControlComposite(Composite parent, int style, IFlyoutPreferences preferences) {
@@ -282,6 +291,9 @@ public final class FlyoutControlComposite extends Composite {
     ////////////////////////////////////////////////////////////////////////////
     //
     // Container
+    // 1. 配置菜单
+    // 2. 更新标题图像
+    // 3. 添加各种监听器  完成监听 绘制  移动 改变大小 鼠标移动
     //
     ////////////////////////////////////////////////////////////////////////////
     public FlyoutContainer(Composite parent, int style) {
@@ -688,6 +700,7 @@ public final class FlyoutControlComposite extends Composite {
 
     /**
      * Draws the state image (arrow) at given location.
+     * 根据 struct结构栏所在位置的不同 画收缩/展开的箭头
      */
     private void drawStateImage(GC gc, int x, int y) {
       DrawUtils.drawImageCHCV(gc, getStateImage(), x, y, m_titleHeight, m_titleHeight);
@@ -828,12 +841,14 @@ public final class FlyoutControlComposite extends Composite {
           gc.dispose();
         }
       }
-      // prepare rotated image
+      // prepare rotated image 创建左转90度的图片，主要视图收起来的时候显示title在左边
       m_titleImageRotated = DrawUtils.createRotatedImage(m_titleImage);
     }
 
     /**
      * Draws two title lines.
+     * 一下子画两条线
+     * 1/3 和 2/3处各画一条
      */
     private void drawTitleLines(GC gc, int x, int height, int width) {
       drawTitleLine(gc, x, height / 3, width);
@@ -842,6 +857,7 @@ public final class FlyoutControlComposite extends Composite {
 
     /**
      * Draws single title line.
+     * 一共有四条线达到立体效果
      */
     private void drawTitleLine(GC gc, int x, int y, int width) {
       int right = x + TITLE_LINES;

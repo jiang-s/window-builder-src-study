@@ -19,6 +19,14 @@ import org.eclipse.swt.widgets.Layout;
 /**
  * {@link PageBook} is a {@link Composite} where only a single {@link Control} is visible at a time.
  * It is similar to a notebook, but without tabs.
+ * PageBook(实现了一个自定义的composite) 用于设计器的页面封装 swt的设计器  xml的设计器都用了它
+ * 有自己的layout PageBookLayout。
+ * 定义的行为主要有 
+ *     页面控件
+ *     获取/显示页面控件
+ *     页面布局
+ *     
+ * 真正的设计器控件还是用show方法从外面传进来的
  * 
  * @author scheglov_ke
  * @coverage core.control
