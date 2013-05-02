@@ -29,6 +29,8 @@ import org.eclipse.swt.widgets.Listener;
 
 /**
  * A Canvas that contains {@link Figure Figures}.
+ * 含有RootFigure对象的画布
+ * 并且会在这创建RootFigure对象
  * 
  * @author lobas_av
  * @coverage gef.draw2d

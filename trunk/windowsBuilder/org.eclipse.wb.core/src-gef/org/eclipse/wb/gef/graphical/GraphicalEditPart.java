@@ -17,6 +17,7 @@ import org.eclipse.wb.gef.core.tools.DragEditPartTracker;
 import org.eclipse.wb.gef.core.tools.Tool;
 
 /**
+ * 编辑器中的一个个图形控件
  * @author lobas_av
  * @coverage gef.graphical
  */
