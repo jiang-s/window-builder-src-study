@@ -29,12 +29,17 @@ import org.eclipse.swt.widgets.Listener;
 /**
  * The {@link Composite} with horizontal/vertical {@link HeaderGraphicalViewer}'s and main
  * {@link GraphicalViewer}.
+ * 真正设计区域的画布控件 最右部分
  * 
  * @author scheglov_ke
  * @coverage core.editor
  */
 public final class ViewersComposite extends Composite {
   private static final int HEADER_SIZE = 15;
+  
+  /**
+   * 五个viewer
+   */
   private final GraphicalViewer m_viewer;
   private final HeaderGraphicalViewer m_horizontalViewer;
   private final HeaderGraphicalViewer m_verticalViewer;

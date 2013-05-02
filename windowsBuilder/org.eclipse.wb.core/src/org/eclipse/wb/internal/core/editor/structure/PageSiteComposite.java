@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.ToolBar;
 
 /**
  * The site {@link Composite} for {@link IPage}.
+ * 用于结构编辑窗口 属性页窗口的父控件封装
  * 
  * @author scheglov_ke
  * @coverage core.editor.structure

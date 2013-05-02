@@ -41,11 +41,14 @@ public final class DesignComponentsComposite extends Composite {
   //
   // Composite
   // Add by chenxiaguang on 20130428
-  // 设计器左上角的Components 窗口
+  // 设计器   包括 Components  窗口   properties窗口 编辑器设计主区域
+  // 他的父是dock 控件
   ////////////////////////////////////////////////////////////////////////////
   public DesignComponentsComposite(Composite parent, int style) {
     super(parent, style);
     setLayout(new FillLayout());
+    
+    // 用了一个sashForm 将compoents和properties分开 这个sashForm是wb自己扩展的 可以智能决定是竖向还是横向拆分的 
     m_sashForm = new SelfOrientingSashForm(this, SWT.NONE);
     // create pages
     {
