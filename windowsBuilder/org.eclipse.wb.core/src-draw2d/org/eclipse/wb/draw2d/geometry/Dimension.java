@@ -15,6 +15,7 @@ import java.io.Serializable;
 /**
  * Stores an integer width and height. This class provides various methods for manipulating this
  * Dimension or creating new derived Objects.
+ * 尺寸帮助类  放大 缩小之类
  * 
  * @author lobas_av
  * @coverage gef.draw2d

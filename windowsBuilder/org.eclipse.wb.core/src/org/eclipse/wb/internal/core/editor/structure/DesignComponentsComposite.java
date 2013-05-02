@@ -92,6 +92,9 @@ public final class DesignComponentsComposite extends Composite {
 
   /**
    * Sets information about editor.
+   * 这个方法有个逻辑是处理m_graphicalViewer属性
+   * 塞值得地方时在具体的设计器实现上 比如JavaDesignComposite 
+   * 本质上来之ViewersComposite对象的m_viewer属性，即是GraphicalViewer的对象实例
    */
   public void setInput(IEditPartViewer editPartViewer, ObjectInfo rootObject) {
     m_treePage.setInput(editPartViewer, rootObject);

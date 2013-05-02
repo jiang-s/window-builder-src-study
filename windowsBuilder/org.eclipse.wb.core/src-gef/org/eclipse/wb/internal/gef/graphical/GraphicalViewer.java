@@ -33,6 +33,12 @@ import org.apache.commons.lang.ObjectUtils;
 import java.util.Collection;
 
 /**
+ * EditorViewer 是MVC模型中v的一部分
+ *  有m_canvas 根控件m_rootEditPart 事件管理器  等属性
+ *  m_canvas 是@see FigureCanvas 实例，FigureCanvas又含有@see RootFigure 实例
+ *    RootFigure 和@see FigureCanvas 相互引用
+ *    Viewer会绑定根模型
+ *    
  * @author lobas_av
  * @coverage gef.graphical
  */

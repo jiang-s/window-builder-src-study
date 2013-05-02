@@ -22,6 +22,11 @@ import org.eclipse.wb.internal.draw2d.IRootFigure;
 import org.eclipse.wb.internal.gef.core.IRootContainer;
 
 /**
+ * 编辑器图形控件之根图形控件 相当于xvde中的主面板
+ * 该编辑器引进了层的概念 每个Layer都是Figure的子类  那么既然就可以体现父子关系
+ * 会在构造方法中初始化 若干 要用到的层
+ * 与@see RootFigure 有什么区别
+ * 该实例持有IRootFigure m_rootFigure属性，这里指RootFigure的实例
  * A {@link RootEditPart} is the <i>root</i> of an {@link IEditPartViewer}. It bridges the gap
  * between the {@link IEditPartViewer} and its contents. It does not correspond to anything in the
  * model, and typically can not be interacted with by the User. The Root provides a homogeneous
@@ -43,6 +48,8 @@ class RootEditPart extends GraphicalEditPart implements IRootContainer {
   public RootEditPart(IEditPartViewer viewer, IRootFigure rootFigure) {
     m_viewer = viewer;
     m_rootFigure = rootFigure;
+    
+    // 创建各种要用的层
     createLayers();
   }
 

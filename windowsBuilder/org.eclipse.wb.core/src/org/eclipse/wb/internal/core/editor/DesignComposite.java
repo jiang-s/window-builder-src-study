@@ -93,7 +93,7 @@ public abstract class DesignComposite extends Composite {
       mainComposite.addMenuContributor(new DesignerFlyoutMenuContributor(StructureView.ID));
     }
     
-    // create components composite
+    // create components composite 左侧的结构和属性窗口
     m_componentsComposite =
         new DesignComponentsComposite(mainComposite.getFlyoutParent(), SWT.NONE);
     
@@ -115,7 +115,7 @@ public abstract class DesignComposite extends Composite {
       separator.setBackground(IColorConstants.buttonDarker);
       GridDataFactory.create(separator).grabH().fill();
     }
-    // create gefComposite - palette and design canvas (viewer)
+    // create gefComposite - palette and design canvas (viewer) palette和设计板
     createGEFComposite(editorComposite);
   }
 
@@ -135,6 +135,13 @@ public abstract class DesignComposite extends Composite {
     createViewersComposite(gefComposite.getClientParent());
   }
 
+  /**
+   * <b>创建设计区域的控件  即 @see ViewersComposite </b>
+   * <一句话功能简述>
+   * <功能详细描述>
+   * @param parent
+   * @see [类、类#方法、类#成员]
+   */
   private void createViewersComposite(Composite parent) {
     m_viewersComposite = new ViewersComposite(parent, SWT.NONE);
     // prepare domain

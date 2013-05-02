@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * RootFigure 和@see FigureCanvas 相互引用
+ * 与 @see org.eclipse.wb.internal.gef.graphical.RootEditPart 有什么区别？
+ * 该类的实例被RootEditPart 一个属性持有。
  * @author lobas_av
  * @coverage gef.draw2d
  */
