@@ -17,9 +17,9 @@ package org.eclipse.wb.gef.core;
  * @author scheglov_ke
  * @coverage gef.core
  */
-public interface ICommandExceptionHandler {
   /**
    * Notifies that exception was happened.
    */
+  public interface ICommandExceptionHandler{
   void handleException(Throwable exception);
 }

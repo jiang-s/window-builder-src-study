@@ -102,6 +102,10 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   ////////////////////////////////////////////////////////////////////////////
   private static final Image m_plusImage = DesignerPlugin.getImage("properties/plus.gif");
   private static final Image m_minusImage = DesignerPlugin.getImage("properties/minus.gif");
+  
+  /**
+   * state (plus/minus) image 就是加减号图片的宽度大小
+   */
   private static int m_stateWidth = 9;
   ////////////////////////////////////////////////////////////////////////////
   //
@@ -114,6 +118,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   private List<PropertyInfo> m_properties;
   private final Set<String> m_expandedIds = Sets.newTreeSet();
   private Image m_bufferedImage;
+  
+  // 行高
   private int m_rowHeight;
   private int m_selection;
   private int m_page;
@@ -131,6 +137,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
     {
       GC gc = new GC(this);
       try {
+        
+        // 行高. 字体高度 然后 上下再加 1像素
         m_rowHeight = 1 + gc.getFontMetrics().getHeight() + 1;
       } finally {
         gc.dispose();
@@ -623,13 +631,17 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   ////////////////////////////////////////////////////////////////////////////
   /**
    * Configures vertical {@link ScrollBar}.
+   * 垂直方向的滚动条
    */
   private void configureScrolling() {
     ScrollBar verticalBar = getVerticalBar();
     if (m_properties == null) {
       verticalBar.setEnabled(false);
     } else {
+      
+      // 看当前可见大小能容纳多少properties
       m_page = getClientArea().height / m_rowHeight;
+      
       m_selection = Math.max(0, Math.min(m_properties.size() - m_page, m_selection));
       verticalBar.setValues(m_selection, 0, m_properties.size(), m_page, 1, m_page);
       // enable/disable scrolling
@@ -649,6 +661,7 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   //
   ////////////////////////////////////////////////////////////////////////////
   /**
+   * 获得x方向的开始位置  有可能属于子孙节点 那么就有缩进*在哪级孙子上
    * @return the <code>X</code> position for first pixel of {@link PropertyInfo} title (location of
    *         state image).
    */
@@ -657,6 +670,7 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   }
 
   /**
+   * 获得title文本的位置  已经考虑 前面有加减号的情况(通过getTitleX算的)
    * @return the <code>X</code> position for first pixel of {@link PropertyInfo} title text.
    */
   private int getTitleTextX(PropertyInfo propertyInfo) {
@@ -664,6 +678,7 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   }
 
   /**
+   * 加减号图片的宽度加上 图片离右边title的间隙大小
    * @return the indentation for single level.
    */
   private int getLevelIndent() {
@@ -1087,14 +1102,16 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
     int[] presentationsWidth = showPresentations(clientArea);
     // draw properties
     {
+      
+      // 减去滚动条 滚过去的高度
       int y = clientArea.y - m_rowHeight * m_selection;
       for (int i = 0; i < m_properties.size(); i++) {
-        // skip, if not visible yet
+        // skip, if not visible yet 看不见的 直接跳过
         if (y + m_rowHeight < 0) {
           y += m_rowHeight;
           continue;
         }
-        // stop, if already invisible
+        // stop, if already invisible 已经绘制到超出区域的停止绘制
         if (y > clientArea.height) {
           break;
         }
@@ -1190,7 +1207,9 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   }
 
   /**
-   * 绘制单个属性 表格项目 Draws single {@link PropertyInfo} in specified rectangle.
+   * 绘制单个属性 表格项目
+   * 关键部分
+   * Draws single {@link PropertyInfo} in specified rectangle.
    */
   private void drawProperty(GC gc, PropertyInfo propertyInfo, int y, int height, int width) {
     // remember colors
@@ -1199,6 +1218,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
     // draw property
     try {
       Property property = propertyInfo.getProperty();
+      
+      // 是否是选中状态
       boolean isActiveProperty =
           m_activePropertyInfo != null && m_activePropertyInfo.getProperty() == property;
       // set background
@@ -1206,6 +1227,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
         if (isActiveProperty) {
           gc.setBackground(COLOR_PROPERTY_BG_SELECTED);
         } else {
+          
+          // 是否被修改
           if (property.isModified()) {
             gc.setBackground(COLOR_PROPERTY_BG_MODIFIED);
           } else {
@@ -1214,7 +1237,7 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
         }
         gc.fillRectangle(0, y, width, height);
       }
-      // draw state image
+      // draw state image 如果是复合控件就要画 + - 号 根据是否展开状态来判
       if (propertyInfo.isShowComplex()) {
         Image stateImage = propertyInfo.isExpanded() ? m_minusImage : m_plusImage;
         DrawUtils.drawImageCV(gc, stateImage, getTitleX(propertyInfo), y, height);
@@ -1224,14 +1247,16 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
         // configure GC
         {
           gc.setForeground(COLOR_PROPERTY_FG_TITLE);
-          // check category
+          
+          // check category 高级选项做不同颜色和字体的区分
           if (getCategory(property).isAdvanced()) {
             gc.setForeground(COLOR_PROPERTY_FG_ADVANCED);
             gc.setFont(m_italicFont);
           } else if (getCategory(property).isPreferred() || getCategory(property).isSystem()) {
             gc.setFont(m_boldFont);
           }
-          // check for active
+          
+          // check for active 是选中状态背景设置成蓝色
           if (isActiveProperty) {
             gc.setForeground(COLOR_PROPERTY_FG_SELECTED);
           }
