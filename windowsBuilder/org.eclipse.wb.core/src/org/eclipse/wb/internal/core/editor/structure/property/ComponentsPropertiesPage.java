@@ -137,6 +137,12 @@ public final class ComponentsPropertiesPage implements IPage {
   private Property m_activeProperty;
   private IToolBarManager m_toolBarManager;
 
+  /**
+   * 会在setPage时候调用
+   * setPage中用的ToolBarManager 是这个实例初始化的时候就创建出来的
+   * 重载方法
+   * @param toolBarManager
+   */
   public void setToolBar(IToolBarManager toolBarManager) {
     m_toolBarManager = toolBarManager;
     updateActions();

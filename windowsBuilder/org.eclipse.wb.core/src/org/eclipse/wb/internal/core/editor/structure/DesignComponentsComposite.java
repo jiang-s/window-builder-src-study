@@ -41,7 +41,7 @@ public final class DesignComponentsComposite extends Composite {
   //
   // Composite
   // Add by chenxiaguang on 20130428
-  // 设计器   包括 Components  窗口   properties窗口 编辑器设计主区域
+  // 设计器   包括 Components  窗口   properties窗口 不含编辑器设计主区域
   // 他的父是dock 控件
   ////////////////////////////////////////////////////////////////////////////
   public DesignComponentsComposite(Composite parent, int style) {
