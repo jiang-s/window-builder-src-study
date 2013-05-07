@@ -62,6 +62,7 @@ import java.util.List;
 
 /**
  * Implementation of {@link IPage} for displaying {@link Property}'s of {@link ObjectInfo}'s.
+ * 显示属性编辑器的那个page
  * 
  * @author scheglov_ke
  * @coverage core.editor.structure

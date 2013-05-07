@@ -123,6 +123,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
   private int m_rowHeight;
   private int m_selection;
   private int m_page;
+  
+  // 分离器
   private int m_splitter = -1;
 
   ////////////////////////////////////////////////////////////////////////////
@@ -363,6 +365,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
    * Handles {@link SWT#MouseDown} event.
    */
   private void handleMouseDown(MouseEvent event) {
+    
+    // 是否可以通过拖动改变两列的宽度
     m_splitterResizing = event.button == 1 && m_properties != null && isLocationSplitter(event.x);
     // click in property
     if (!m_splitterResizing && m_properties != null) {
@@ -717,6 +721,7 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
 
   /**
    * Returns <code>true</code> if <code>x</code> coordinate is on splitter.
+   * 判断鼠标是否在垂直列线的可以拉动范围内
    */
   private boolean isLocationSplitter(int x) {
     return Math.abs(m_splitter - x) < 2;
@@ -794,6 +799,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
         while (true) {
           boolean expanded = false;
           List<PropertyInfo> currentProperties = Lists.newArrayList(m_properties);
+          
+          // expandFromHistory 会做展开 和将展开后的孩子节点 加入m_properties 列表  并放在合适的位置： 按顺序放在其父后面
           for (PropertyInfo propertyInfo : currentProperties) {
             expanded |= propertyInfo.expandFromHistory();
           }
@@ -1093,7 +1100,10 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
    * Draws all {@link PropertyInfo}'s, separators, etc.
    */
   private void drawContent(GC gc) {
+    
+    // 当前控件的 可见大小
     Rectangle clientArea = getClientArea();
+//    System.out.println("clientArea for properties table-" + clientArea);
     // prepare fonts
     m_baseFont = gc.getFont();
     m_boldFont = DrawUtils.getBoldFont(m_baseFont);
@@ -1118,6 +1128,7 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
         // draw single property
         {
           PropertyInfo propertyInfo = m_properties.get(i);
+//          System.out.println("presentationsWidth[" + propertyInfo.getProperty().getTitle() + "]" + presentationsWidth[i]);
           drawProperty(gc, propertyInfo, y + 1, m_rowHeight - 1, clientArea.width
               - presentationsWidth[i]);
           y += m_rowHeight;
@@ -1132,7 +1143,9 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
     // draw rectangle around table
     gc.setForeground(COLOR_LINE);
     gc.drawRectangle(0, 0, clientArea.width - 1, clientArea.height - 1);
-    // draw splitter
+    
+    
+    // draw splitter 这就是中间那条分隔线(表格共两列嘛)
     gc.setForeground(COLOR_LINE);
     gc.drawLine(m_splitter, 0, m_splitter, clientArea.height);
     // dispose font
@@ -1159,6 +1172,14 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
       PropertyInfo propertyInfo = m_properties.get(i);
       Property property = propertyInfo.getProperty();
       PropertyEditorPresentation presentation = property.getEditor().getPresentation();
+      
+      /**
+       * 这个presentation  是指value后面的扩展小按钮 比如layout栏位后的那个下拉箭头
+       * 这个show方法 就是设置这个按钮的bounds
+       * 同时返回这个按钮的宽度
+       * layout对应的presentation实现为ButtonPropertyEditorPresentationImpl
+       * 并不是所有的property对应的editor都有presentation实现，仅针对value后面有小箭头的 或者三个点按钮的才会有
+       */
       if (presentation != null) {
         presentationsWidth[i] = presentation.show(this, property, x, y + 1, w, m_rowHeight - 1);
       }
@@ -1169,23 +1190,43 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
 
   /**
    * Draws lines from expanded complex property to its last sub-property.
+   * 画加号展开后的竖线
    */
   private void drawExpandLines(GC gc, Rectangle clientArea) {
+    
+    // 高度是行高减1
     int height = m_rowHeight - 1;
+    
+    // x轴的偏移量是+ -图片的一半宽度 正好这个线画在图片的中间
     int xOffset = m_plusImage.getBounds().width / 2;
+    
+    // y轴偏移量 是整个高度减去加减图片的高度后除以2   就相当于图片下面剩下的部分
     int yOffset = (height - m_plusImage.getBounds().width) / 2;
     //
     int y = clientArea.y - m_selection * m_rowHeight;
     gc.setForeground(COLOR_COMPLEX_LINE);
     for (int i = 0; i < m_properties.size(); i++) {
       PropertyInfo propertyInfo = m_properties.get(i);
-      //
+      
+      // 是具备展开条件的就处理 否则 直接处理y值
       if (propertyInfo.isExpanded()) {
+        
+        /**
+         * 下面是一个画展开竖线的算法
+         * 
+         */
         int index = m_properties.indexOf(propertyInfo);
         // prepare index of last sub-property
         int index2 = index;
         for (; index2 < m_properties.size(); index2++) {
           PropertyInfo nextPropertyInfo = m_properties.get(index2);
+          
+          /**
+           * 从第一层循环的游标 开始往后找  找到不是自己 且 级别小于等于自己的break
+           * 这样做意味着当找和自己一级的或者比自己级别还高的break
+           * break后 index2做一个--的动作，即回退一下，即回退到当前propertyinfo的最后一个子上面去
+           * 很显然，这个properties列表中的顺序是事先排好的 顺序很重要，一个家族的要按顺序放在一起
+           */
           if (nextPropertyInfo != propertyInfo
               && nextPropertyInfo.getLevel() <= propertyInfo.getLevel()) {
             break;
@@ -1194,6 +1235,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
         index2--;
         // draw line if there are children
         if (index2 > index) {
+          
+          // 主要用于算y2 的值   x的值根据其title缩进程度就能算出来  y2 就是指这个竖条扩展线画到什么位置结束
           int x = getTitleX(propertyInfo) + xOffset;
           int y1 = y + height - yOffset;
           int y2 = y + m_rowHeight * (index2 - index) + m_rowHeight / 2;
