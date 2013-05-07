@@ -56,6 +56,16 @@ public abstract class Property implements IAdaptable {
     m_category = PropertyCategory.NORMAL;
     m_editor = editor;
   }
+  
+  @Override
+  public String toString() {
+    try {
+      return this.getTitle();
+    } catch (Exception e) {
+      //
+    }
+    return super.toString();
+  }
 
   ////////////////////////////////////////////////////////////////////////////
   //

@@ -25,6 +25,8 @@ public abstract class PropertyEditorPresentation {
   /**
    * Shows presentation for given {@link Property}.
    * 
+   * 返回这个属性在给出的矩形的右边占多宽
+   * @param y 是当前属性项在 控件区域y坐标值
    * @return the width that this presentation occupies on the right of given rectangle.
    */
   public abstract int show(PropertyTable propertyTable,

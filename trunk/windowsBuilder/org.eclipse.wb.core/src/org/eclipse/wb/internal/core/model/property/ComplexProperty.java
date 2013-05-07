@@ -51,6 +51,18 @@ public class ComplexProperty extends Property {
     setText(text);
     setProperties(properties);
   }
+  
+  
+
+  @Override
+  public String toString() {
+    try {
+      return this.getTitle() + "--" + this.getText();
+    } catch (Exception e) {
+      //
+    }
+    return super.toString();
+  }
 
   ////////////////////////////////////////////////////////////////////////////
   //
