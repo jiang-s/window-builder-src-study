@@ -1037,6 +1037,8 @@ public class PropertyTable extends Canvas implements ISelectionProvider {
     m_painting = true;
     //
     try {
+      
+      // 这个主要用点击value可以编辑的那种
       setActiveEditorBounds();
       // prepare buffered image
       if (m_bufferedImage == null || m_bufferedImage.isDisposed()) {
